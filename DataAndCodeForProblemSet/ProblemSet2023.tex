@@ -1,0 +1,236 @@
+\documentclass[11pt]{article}
+
+\usepackage[latin1]{inputenc}
+\usepackage[danish]{babel}        % Use English headings, date format.
+\usepackage{a4wide}               % A4 (DIN format).
+\usepackage[hidelinks]{hyperref}  % Enable direct links in PDF (e.g. for data sets)
+
+\textheight=1.03\textheight
+\textwidth=1.10\textwidth
+\hoffset=-0.05\textwidth
+\leftmargin=-0.18\textwidth
+\headsep=0.0pt
+\headheight=0.0pt
+
+\vfuzz2pt   % Don't report over-full v-boxes if over-edge is small
+\hfuzz10pt  % Don't report over-full h-boxes if over-edge is smallish
+
+\newcommand{\half}{\mbox{$\frac{1}{2}$}}
+
+\begin{document}
+%\pagestyle{empty}
+
+%----------------------------------------------------------------------------
+\noindent
+University of Copenhagen \hfill
+Niels Bohr Institute, \today \par
+\vspace{-2ex}
+\noindent
+\hrulefill
+
+\vspace{1ex}
+\begin{center}
+{\bf {\Huge Applied Statistics}}\\
+\vspace{1ex}
+{\large Problem Set in Applied Statistics 2023/24}
+\end{center}
+
+%----------------------------------------------------------------------------
+\vspace{0ex}
+\noindent
+This is the problem set for Applied Statistics 2023/24. A solution in PDF format must be submitted on Absalon by 22:00
+on Thursday the 4th of January 2024. Links to data files along with code to read the data can be found on the
+  \href{www.nbi.dk/$\sim$petersen/Teaching/AppliedStatistics2023.html}{\bf course webpage} and
+  \href{https://github.com/AppliedStatisticsNBI/AppStat2023}{\bf GitHub}.
+Working in groups and discussing the problems with others is allowed. However, you should produce your own code,
+write your own solution up, and state your collaboration(s).
+
+\vspace{-2ex}
+\begin{center}
+  Thank you for all your hard work so far, Malthe, Azzurra, Arnau, Thomas, Gaia, Mathias, \& Troels.
+\end{center}
+
+%----------------------------------------------------------------------------
+
+\noindent
+\hrulefill\\
+\emph{Science may be described as the art of systematic oversimplification.}\\
+  \phantom{foobar} \hfill [Karl Popper, Austrian/British philosopher 1902-1994]\\[-2ex]
+
+  
+%----------------------------------------------------------------------------
+\vspace{-2ex}
+\noindent
+\hrulefill
+
+\vspace{4ex}
+\noindent
+{\bf I -- Distributions and probabilities:}
+\begin{description}
+  \item[1.1] (8 points)
+  The scores of two tests (A \& B) are both Gaussianly distributed with $\mu=50$, $\sigma=20$.
+  \vspace*{-1ex}
+  \begin{itemize}
+    \item What fraction of students will get a score in test A in the range [55,65]?
+    \item What uncertainty on the mean score do you obtain from 120 B test scores?
+    \item What fraction should get a score above 70 in both tests if $\rho_{A,B} = 0$? If $\rho_{A,B} = 0.75$?
+  \end{itemize}
+%
+  \item[1.2] (4 points)
+  At the roulette you get 12/37 winning chances if you play {\it douzaine} (e.g.\ 1-12).
+  \vspace*{-1ex}
+  \begin{itemize}
+    \item If you play {\it douzaine} 20 times, what is the chance that you will win 8 or more times?
+  \end{itemize}
+\end{description}
+
+
+
+%----------------------------------------------------------------------------
+
+\vspace{2ex}
+\noindent
+{\bf II -- Error propagation:}
+\begin{description}
+\item[2.1] (8 points)
+  Let $x = 1.043 \pm 0.014$ and $y = 0.07 \pm 0.23$, and let $z_1 = xy e^{-y}$ and $z_2 = (y+1)^{3}/(x \!-\! 1)$.
+  \vspace*{-1ex}
+  \begin{itemize}
+    \item Which of the (uncorrelated) variables $x$ and $y$ contributes most to the uncertainty on $z_1$?
+    \item What are the uncertainties of $z_1$ and $z_2$, if $x$ and $y$ are correlated with $\rho = 0.4$?
+    \item Plot $z_1 \in [-2,2]$ against $z_2 \in [-10,90]$. In this range, what is the $z_1$ vs.\ $z_2$ correlation?
+  \end{itemize}
+%
+\item[2.2] (7 points)
+  In a (Cavendish) experiment, you have made five measurements of Earth's density $\rho$:\\[-1ex]
+  \vspace*{-3ex}
+  \begin{center}
+  \begin{tabular}{lccccc}
+    % \hline
+    \hline
+    Observation                   &1                &2                 &3                &4                &5\\
+    Result (in g/$\mbox{cm}^3$)   &5.50 $\pm$ 0.10  &5.61 $\pm$ 0.21   &4.88 $\pm$ 0.15  &5.07 $\pm$ 0.14  &5.26 $\pm$ 0.13\\
+    % \hline
+    \hline
+  \end{tabular}
+  \end{center}
+% Cavendish original data (though missing one entry!):
+%   5.50 5.61 4.88 5.07 5.26 5.55 5.36 5.29 5.58 5.65 5.51 5.57 5.53 5.62 5.29 5.44
+%   5.34 5.79 5.10 5.27 5.39 5.42 5.47 5.63 5.34 5.46 5.30 5.75 5.68 5.85
+  \vspace*{-3ex}
+  \begin{itemize}
+    \item What is the combined result and uncertainty of these five measurements?
+    \item Are your measurements consistent with each other? If not, what is then your best estimate?
+    \item The precise value is $5.514$ g/$\mbox{cm}^3$. How consistent is you measurement with this number?
+  \end{itemize}
+%
+\item[2.3] (7 points)
+  An ellipse $E$ has semi-major axis $a = 1.04 \pm 0.27$ and eccentricity $e = 0.71 \pm 0.12$.
+  \vspace*{-1ex}
+  \begin{itemize}
+    \item The area $A$ of an ellipse is generally $A = \pi a^2 \sqrt{1 - e^2}$. What is the area of the ellipse $E$?
+    \item The circumference $C$ has no formula but can be bounded as $4a \sqrt{2-e^2} < C < \pi a \sqrt{4-2e^2}$.
+      What value and uncertainty for $C$ would you give?
+  \end{itemize}
+\end{description}
+
+
+
+%----------------------------------------------------------------------------
+
+% \newpage
+\noindent
+{\bf III -- Simulation / Monte Carlo:}
+\begin{description}
+  \item[3.1] (8 points)
+    You are optimising container transport, in particular the time, $\Delta t$, between the
+    daily truck arrivals (120 minutes uncertainty) and the ship departure (50 minutes uncertainty).
+  \vspace*{-1ex}
+  \begin{itemize}
+    \item If $\Delta t$ = 130 minutes, what fraction of containers will have to wait to the next day?
+    \item For what value of $\Delta t$ do containers, on average, have the least waiting time?
+  \end{itemize}
+%
+  \item[3.2] (13 points)
+    The Rayleigh distribution is a PDF given by: $f(x) = \frac{x}{\sigma^2} \exp(-\frac{1}{2}x^2/\sigma^2)$,
+    with $x \in [0,\infty]$.
+  \vspace*{-4ex}
+  \begin{itemize}
+    \item By what method(s) would you generate random numbers (from uniform) according to $f(x)$?
+    \item Generate N=1000 random numbers according to $f(x)$ for $\sigma = 2$, and plot these.
+    \item Fit this distribution of random numbers. How well can you determine $\sigma$ from the fit?
+    \item Test the $1/\sqrt{N}$ scaling of the $\sigma$ fit uncertainty for $N \in [50,5000]$.
+  \end{itemize}
+\end{description}
+
+
+%----------------------------------------------------------------------------
+
+\noindent
+{\bf IV -- Statistical tests:}
+\begin{description}
+\item[4.1] (15 points)
+  Patients are either healthy or infected with Anoroc disease and their temperature, blood pressure and age is found in
+  \href{http://www.nbi.dk/~petersen/data\_AnorocDisease.txt}{\bf www.nbi.dk/$\sim$petersen/data\_AnorocDisease.csv}.
+  For patients 1-800 (control) the outcome in known, while it is unknown for patients 801-1000 (unknown).
+  \vspace*{-1ex}
+  \begin{itemize}
+    \item Using the control sample, plot the three distributions for healthy and sick, respectively.
+      Which of the three single measures gives the highest separation between healthy and sick?
+    \item Test if the age distribution is statistically the same between healthy and sick.
+    \item Given any combination of all three variables, separate the two groups as well as possible
+      and estimate the number of infected patients in the unknown group.
+    \item Assuming a prior probability of $p=0.01$ of being ill, what is the probability that a new patient with
+      $T = 38.5~ \mbox{C}^{\circ}$ is ill?
+  \end{itemize}
+  %
+\item[4.2] (14 points)
+  The file \href{http://www.nbi.dk/~petersen/data\_CountryScores.txt}{\bf www.nbi.dk/$\sim$petersen/data\_CountryScores.csv}
+  contains a list of countries along with several key numbers and indices.
+  \vspace*{-1ex}
+  \begin{itemize}
+    \item Determine the mean, median, standard deviation, 15.87\%, and 84.13\% quantiles of the GDP.
+    \item Does the distribution of $\log_{10}$(PopSize) follow a Gaussian distribution?
+    \item What are the Pearson and Spearman correlations between happiness and education indeces?
+    \item Plot the Happiness-Index as a function of GDP, and fit the relation between the two.
+      From this fit, what would you estimate the uncertainty to be on the Happiness-index?
+  \end{itemize}
+\end{description}
+
+
+%----------------------------------------------------------------------------
+
+\noindent
+{\bf V -- Fitting data:}
+\begin{description}
+\item[5.1] (16 points)
+  The file
+  \href{http://www.nbi.dk/~petersen/data\_GlacierSizes.txt}{\bf www.nbi.dk/$\sim$petersen/data\_GlacierSizes.csv}
+  contains the estimated area and volume including uncertainties of 434 glaciers with an area above 1 $\mbox{km}^2$.
+  \vspace{-1.0ex}
+  \begin{itemize}
+    \item Plot volume as a function of area. Which of the two have largest relative uncertainties?
+    \item Fit data with the expected Area-Volume relation $V \sim A^{3/2}$. Assume no area uncertainties.
+    \item Are you satisfied with the fit? And if not, point out its specific deficiencies.
+    \item Fit again with improved functional form(s), and quantify the improvements.
+    \item Redo this fit including the uncertainties in area. How large is the effect of including these?
+    \item What volume and with what uncertainty would you expect a glacier of area 0.5 $\mbox{km}^2$ to have?
+  \end{itemize}
+\end{description}
+
+\noindent
+\hrulefill\\
+\emph{Don't worry too much about statistics! Just tell us what you do, and do what you tell us.}\\
+  \phantom{foobar} \hfill [Roger Barlow, ICHEP conference 2006, Moscow]\\[-2ex]
+
+
+%----------------------------------------------------------------------------
+
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 
+
