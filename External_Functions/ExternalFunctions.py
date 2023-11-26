@@ -6,14 +6,14 @@
 import numpy as np
 
 def format_value(value, decimals):
-    """ 
-    Checks the type of a variable and formats it accordingly.
-    Floats has 'decimals' number of decimals.
     """
-    
-    if isinstance(value, (float, np.float)):
+    Checks the type of a variable and formats it accordingly.
+    Floats have 'decimals' number of decimals.
+    """
+
+    if isinstance(value, float):
         return f'{value:.{decimals}f}'
-    elif isinstance(value, (int, np.integer)):
+    elif isinstance(value, int):
         return f'{value:d}'
     else:
         return f'{value}'
