@@ -6,11 +6,11 @@
 import numpy as np
 
 def format_value(value, decimals):
-    """ 
+    """
     Checks the type of a variable and formats it accordingly.
     Floats have 'decimals' number of decimals.
     """
-    
+
     if isinstance(value, float):
         return f'{value:.{decimals}f}'
     elif isinstance(value, int):
