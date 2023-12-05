@@ -74,7 +74,7 @@ def add_text_to_ax(x_coord, y_coord, string, ax, fontsize=12, color='k'):
 #  Probfit replacement
 # =============================================================================
 
-from iminuit.util import make_func_code
+#from iminuit.util import make_func_code
 from iminuit import describe #, Minuit,
 
 def set_var_if_None(var, x):
@@ -110,7 +110,11 @@ class Chi2Regression:  # override the class with a better one
         
         self.sy = set_var_if_None(sy, self.x)
         self.weights = set_var_if_None(weights, self.x)
-        self.func_code = make_func_code(describe(self.f)[1:])
+        #self.func_code = make_func_code(describe(self.f)[1:])
+
+        # Updated part: Use _parameters instead of func_code
+        param_names = describe(self.f)[1:]  # assuming the first parameter is 'x'
+        self._parameters = {name: None for name in param_names}
 
     def __call__(self, *par):  # par are a variable number of model parameters
         
@@ -166,7 +170,11 @@ class UnbinnedLH:  # override the class with a better one
             self.extended_bound = (np.min(data), np.max(data))
 
         
-        self.func_code = make_func_code(describe(self.f)[1:])
+        #self.func_code = make_func_code(describe(self.f)[1:])
+        
+        # Updated part: Use _parameters instead of func_code
+        param_names = describe(self.f)[1:]  # assuming the first parameter is 'x'
+        self._parameters = {name: None for name in param_names}
 
     def __call__(self, *par):  # par are a variable number of model parameters
         
@@ -244,8 +252,13 @@ class BinnedLH:  # override the class with a better one
         self.nint_subdiv = nint_subdiv
         
         
-        self.func_code = make_func_code(describe(self.f)[1:])
-        self.ndof = np.sum(self.h > 0) - (self.func_code.co_argcount - 1)
+        #self.func_code = make_func_code(describe(self.f)[1:])
+        #self.ndof = np.sum(self.h > 0) - (self.func_code.co_argcount - 1)
+
+        # Updated part: Use _parameters instead of func_code
+        param_names = describe(self.f)[1:]  # assuming the first parameter is 'x'
+        self._parameters = {name: None for name in param_names}
+        self.ndof = np.sum(self.h > 0) - len(self._parameters)
         
 
     def __call__(self, *par):  # par are a variable number of model parameters
